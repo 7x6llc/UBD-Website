@@ -76,6 +76,14 @@
   #form-success h3{font-family:var(--serif);font-size:26px;font-weight:600;margin-bottom:14px;}
   #form-success p{font-size:14.5px;font-weight:300;color:var(--graphite);max-width:420px;}
 
+
+  .sms-choice{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:8px;}
+  .sms-choice label{display:inline-flex;align-items:center;gap:7px;margin:0;font-size:13px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--graphite);}
+  .sms-choice input{accent-color:var(--aqua);}
+  #form-error{margin-top:18px;font-size:13px;font-weight:500;color:#8a2032;}
+  .submit-btn[disabled]{opacity:.6;cursor:wait;}
+  .hp-field{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;}
+
   @media (max-width:700px){
     .form-panel{padding:32px 24px;}
     .field-row{grid-template-columns:1fr;gap:0;}
@@ -133,6 +141,17 @@
           <input type="email" id="EMAIL" name="EMAIL" required autocomplete="email">
         </div>
 
+        <div class="field">
+          <label for="MOBILE_PHONE" id="mobile-phone-label">Phone</label>
+          <input type="text" id="MOBILE_PHONE" name="MOBILE_PHONE" autocomplete="tel" inputmode="tel" placeholder="Optional">
+          <p class="hint" id="mobile-phone-hint">A mobile number is optional.</p>
+          <div class="sms-choice" role="group" aria-labelledby="sms-permission-label">
+            <span id="sms-permission-label" style="font-size:12px;font-weight:600;color:var(--navy);">May we text you at this number?</span>
+            <label><input type="radio" name="SMS_OPT_IN" value="true"> Yes</label>
+            <label><input type="radio" name="SMS_OPT_IN" value="false" checked> No</label>
+          </div>
+        </div>
+
         <!-- General-entry interest selector (item 31) -->
         <div class="field conditional" id="general-interest-wrap" hidden>
           <div class="conditional-inner">
@@ -164,8 +183,18 @@
                 <input type="text" id="BUSINESS_NAME_B" name="BUSINESS_NAME" autocomplete="organization">
               </div>
               <div class="field">
+                <label for="LANDLINE_NUMBER">Business Phone</label>
+                <input type="text" id="LANDLINE_NUMBER" name="LANDLINE_NUMBER" autocomplete="tel" inputmode="tel" placeholder="Optional">
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="BUSINESS_SIZE">Approximate Business Size</label>
+                <input type="text" id="BUSINESS_SIZE" name="BUSINESS_SIZE" placeholder="e.g. 45 employees">
+              </div>
+              <div class="field">
                 <label for="GROUP_SIZE_B">Approximate Group / Team Size<span class="req">*</span></label>
-                <input type="text" id="GROUP_SIZE_B" name="GROUP_SIZE" placeholder="e.g. 12">
+                <input type="text" id="GROUP_SIZE_B" name="GROUP_SIZE" placeholder="e.g. 12 participants">
               </div>
             </div>
           </div>
@@ -195,8 +224,8 @@
               </div>
             </div>
             <div class="field">
-              <label for="GROUP_SIZE_S">Approximate Audience Size<span class="req">*</span></label>
-              <input type="text" id="GROUP_SIZE_S" name="GROUP_SIZE" placeholder="e.g. 150">
+              <label for="AUDIENCE_SIZE">Approximate Audience Size<span class="req">*</span></label>
+              <input type="text" id="AUDIENCE_SIZE" name="AUDIENCE_SIZE" placeholder="e.g. 150">
             </div>
           </div>
         </div>
@@ -215,11 +244,16 @@
         <input type="hidden" id="INQUIRY_TYPE" name="INQUIRY_TYPE" value="General">
         <input type="hidden" id="LEAD_SOURCE" name="LEAD_SOURCE" value="Website">
         <input type="hidden" id="INQUIRY_DATE" name="INQUIRY_DATE" value="">
+        <div class="hp-field" aria-hidden="true">
+          <label for="website">Leave this field blank</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
 
         <div class="submit-row">
           <button type="submit" class="submit-btn">Send</button>
           <span style="font-size:12px;font-weight:300;color:var(--graphite);">Diana personally reads every message.</span>
         </div>
+        <p id="form-error" role="alert" hidden></p>
       </form>
 
       <div id="form-success" hidden>

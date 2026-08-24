@@ -56,7 +56,7 @@
     });
   }
 
-  // Centralized Connect form behavior. This version is front-end only; secure Brevo/Netlify submission comes later.
+  // Centralized Connect form behavior + secure Netlify/Brevo submission.
   const form = document.getElementById('connect-form');
   if(form){
     const qs = new URLSearchParams(location.search);
@@ -67,6 +67,10 @@
     const generalSelect = document.getElementById('GENERAL_INTEREST');
     const businessFields = document.getElementById('business-fields');
     const speakingFields = document.getElementById('speaking-fields');
+    const mobileLabel = document.getElementById('mobile-phone-label');
+    const mobileHint = document.getElementById('mobile-phone-hint');
+    const submitBtn = form.querySelector('.submit-btn');
+    const errorEl = document.getElementById('form-error');
 
     const normalizeType = v => ['Personal','Business','Speaking','General'].includes(v) ? v : 'General';
     let inquiryType = normalizeType(qs.get('type') || 'General');
@@ -80,6 +84,8 @@
     function setRequired(container,required){
       if(!container) return;
       container.querySelectorAll('input,select,textarea').forEach(el=>{
+        // Optional business fields remain optional.
+        if(['LANDLINE_NUMBER','BUSINESS_SIZE'].includes(el.name)) return;
         if(required) el.setAttribute('required',''); else el.removeAttribute('required');
       });
     }
@@ -97,6 +103,15 @@
       if(isBusiness && !interest) interest='Unbecoming at Work';
       if(isSpeaking && !interest) interest='Speaking Engagement';
       if(interestEl && interest) interestEl.value=interest;
+
+      if(mobileLabel){
+        mobileLabel.textContent = (isBusiness || isSpeaking) ? 'Mobile / Direct Phone' : 'Phone';
+      }
+      if(mobileHint){
+        mobileHint.textContent = (isBusiness || isSpeaking)
+          ? 'Optional. Use a mobile/direct number if you would like Diana to be able to reach you personally.'
+          : 'Optional.';
+      }
     }
 
     if(dateEl) dateEl.value = new Date().toISOString().slice(0,10);
@@ -114,15 +129,47 @@
       });
     }
 
-    form.addEventListener('submit',(e)=>{
+    form.addEventListener('submit',async (e)=>{
       e.preventDefault();
       if(!form.checkValidity()){
         form.reportValidity();
         return;
       }
-      const success = document.getElementById('form-success');
-      form.hidden = true;
-      if(success) success.hidden = false;
+
+      if(errorEl){ errorEl.hidden = true; errorEl.textContent = ''; }
+      if(submitBtn){ submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+      try{
+        const fd = new FormData(form);
+        const payload = {};
+        fd.forEach((value,key)=>{
+          // For duplicated names in hidden conditional sections, keep the non-empty value.
+          if(value !== '' || !(key in payload)) payload[key] = value;
+        });
+        payload.OPT_IN = document.getElementById('OPT_IN')?.checked || false;
+        payload.SMS_OPT_IN = form.querySelector('input[name="SMS_OPT_IN"]:checked')?.value === 'true';
+        payload.INQUIRY_TYPE = typeEl?.value || inquiryType;
+        payload.INTEREST = interestEl?.value || interest;
+
+        const res = await fetch('/.netlify/functions/submit-inquiry',{
+          method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body:JSON.stringify(payload)
+        });
+        const data = await res.json().catch(()=>({}));
+        if(!res.ok) throw new Error(data.error || 'Your message could not be sent. Please try again.');
+
+        const success = document.getElementById('form-success');
+        form.hidden = true;
+        if(success) success.hidden = false;
+      }catch(err){
+        if(errorEl){
+          errorEl.textContent = err.message || 'Your message could not be sent. Please try again.';
+          errorEl.hidden = false;
+        }
+      }finally{
+        if(submitBtn){ submitBtn.disabled = false; submitBtn.textContent = 'Send'; }
+      }
     });
   }
 })();
