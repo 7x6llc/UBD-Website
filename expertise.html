@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expertise | Unbecoming By Design™</title>
+<meta name="description" content="Diana Lynn's education and professional training in psychology, coaching, trauma-informed practice, Neuro Change, and Human Design — a continuing commitment to becoming a more informed, ethical coach.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/UBDFAVICON02.png">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .philosophy{max-width:720px;margin:0 auto;text-align:center;padding:0 40px;}
+  .philosophy p{font-size:16px;font-weight:300;color:var(--graphite);margin-bottom:20px;}
+
+  .gallery{
+    max-width:var(--max);margin:60px auto 0;padding:0 40px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:26px;
+  }
+  .cred{
+    background:#fff;border:1px solid rgba(6,20,49,0.12);
+    cursor:pointer;overflow:hidden;transition:transform .3s ease, box-shadow .3s ease;
+    display:flex;flex-direction:column;
+  }
+  .cred:hover{transform:translateY(-4px);}
+  .cred .thumb{aspect-ratio:4/3;overflow:hidden;background:#f0ece0;}
+  .cred .thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .cred .meta{padding:18px 20px 22px;}
+  .cred .field{font-size:10.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--aqua-text);margin-bottom:8px;display:block;}
+  .cred h4{font-family:var(--serif);font-size:17px;font-weight:600;color:var(--navy);line-height:1.35;margin-bottom:4px;}
+  .cred .org{font-size:12.5px;font-weight:400;color:var(--graphite);}
+
+  /* lightbox */
+  .lightbox{
+    position:fixed;inset:0;background:rgba(6,20,49,0.92);z-index:1000;
+    display:none;align-items:center;justify-content:center;padding:40px;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{max-width:90vw;max-height:82vh;object-fit:contain;border:2px solid rgba(245,241,232,0.2);}
+  .lightbox .lb-caption{color:var(--ivory);text-align:center;margin-top:18px;font-size:13.5px;font-weight:300;max-width:600px;}
+  .lightbox .lb-close{
+    position:absolute;top:28px;right:36px;color:var(--ivory);font-size:14px;font-weight:700;
+    letter-spacing:0.1em;text-transform:uppercase;background:none;border:1px solid rgba(245,241,232,0.4);
+    padding:10px 18px;cursor:pointer;
+  }
+  .lightbox .lb-close:hover{border-color:var(--aqua);}
+
+  @media (max-width:900px){.gallery{grid-template-columns:1fr 1fr;}}
+  @media (max-width:560px){.gallery{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-inner">
+    <a href="index.html" class="brandmark" aria-label="Unbecoming By Design home">
+      <img src="assets/ULOGO05.png" alt="Unbecoming By Design™">
+    </a>
+    <nav class="primary" aria-label="Primary">
+      <ul>
+        <li><a href="whatisUBD.html" data-page="whatisUBD.html">What Is UBD</a></li>
+        <li><a href="meetdianalynn.html" data-page="meetdianalynn.html">Meet Diana Lynn</a></li>
+        <li><a href="expertise.html" data-page="expertise.html">Expertise</a></li>
+        <li><a href="whatothersaresaying.html" data-page="whatothersaresaying.html">What Others Are Saying</a></li>
+        <li><a href="books.html" data-page="books.html">Books</a></li>
+      </ul>
+      <a href="connect.html?type=General" class="btn-connect">Connect</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero" style="padding-bottom:40px;">
+    <span class="eyebrow">Expertise</span>
+    <h1 class="reveal">Compassion and curiosity before judgment.</h1>
+    <p class="lede reveal">People are complex. No single model explains the whole person — which is why Diana has continued studying, long after any credential was strictly necessary.</p>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="philosophy reveal">
+      <p>Diana's work is rooted in the belief that everyone has a story — and that story should not become a source of shame. The experiences, decisions, adaptations, relationships, successes, mistakes, and circumstances that brought someone to this moment are part of the context in which she learned to survive, succeed, belong, protect herself, and make sense of the world.</p>
+      <p>The goal is not to reject that story. The goal is to own it, understand it, embrace what it taught you, and then decide what still belongs.</p>
+    </div>
+    <p class="pull-quote reveal" style="margin-top:50px;">There is no shame in the life that <span class="mark">brought you</span> to this moment.</p>
+  </section>
+
+  <section style="padding-top:20px;">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="justify-content:center;">Education &amp; Professional Training</span>
+      <h2>A Continuing Commitment</h2>
+      <p>Not credential collecting — a practice of continually becoming a more informed, skilled, and ethical coach.</p>
+    </div>
+
+    <div class="gallery reveal" id="gallery">
+      <div class="cred" data-img="assets/Expertise01.jpg" data-cap="Bachelor of Science in Psychology — Grand Canyon University, 2021">
+        <div class="thumb"><img src="assets/Expertise01.jpg" alt="Grand Canyon University Bachelor of Science in Psychology diploma" loading="lazy"></div>
+        <div class="meta">
+          <span class="field">Education</span>
+          <h4>Bachelor of Science in Psychology</h4>
+          <p class="org">Grand Canyon University</p>
+        </div>
+      </div>
+
+      <div class="cred" data-img="assets/Expertise02.png" data-cap="HCI Certified Health Coach (HCI-CHC) — Health Coach Institute, 2022">
+        <div class="thumb"><img src="assets/Expertise02.png" alt="Certified Health Coach certificate, Health Coach Institute" loading="lazy"></div>
+        <div class="meta">
+          <span class="field">Coaching</span>
+          <h4>Certified Health Coach</h4>
+          <p class="org">Health Coach Institute</p>
+        </div>
+      </div>
+
+      <div class="cred" data-img="assets/Expertise03.png" data-cap="HCI Certified Life Coach (HCI-CLC) — Health Coach Institute, 2022">
+        <div class="thumb"><img src="assets/Expertise03.png" alt="Certified Life Coach certificate, Health Coach Institute" loading="lazy"></div>
+        <div class="meta">
+          <span class="field">Coaching</span>
+          <h4>Certified Life Coach</h4>
+          <p class="org">Health Coach Institute</p>
+        </div>
+      </div>
+
+      <div class="cred" data-img="assets/Expertise04.jpg" data-cap="Manifestation Coach Certification — Thinking Into Results / Scott Haug">
+        <div class="thumb"><img src="assets/Expertise04.jpg" alt="Manifestation Coach Certification" loading="lazy"></div>
+        <div class="meta">
+          <span class="field">Personal Development</span>
+          <h4>Manifestation Coach Certification</h4>
+          <p class="org">Thinking Into Results / Scott Haug</p>
+        </div>
+      </div>
+
+      <div class="cred" data-img="assets/Expertise05.png" data-cap="Certified Trauma-Informed Coach — The Centre for Healing, 2025">
+        <div class="thumb"><img src="assets/Expertise05.png" alt="Certified Trauma-Informed Coach certificate" loading="lazy"></div>
+        <div class="meta">
+          <span class="field">Trauma-Informed Coaching</span>
+          <h4>Certified Trauma-Informed Coach</h4>
+          <p class="org">The Centre for Healing</p>
+        </div>
+      </div>
+
+      <div class="cred" data-img="assets/Expertise06.png" data-cap="Certified Neuro Change Practitioner — NeuroChange Institute, 2025">
+        <div class="thumb"><img src="assets/Expertise06.png" alt="Neuro Change Practitioner certificate" loading="lazy"></div>
+        <div class="meta">
+          <span class="field">Neuro Change</span>
+          <h4>Certified Neuro Change Practitioner</h4>
+          <p class="org">NeuroChange Institute</p>
+        </div>
+      </div>
+
+      <div class="cred" data-img="assets/Expertise07.jpeg" data-cap="Human Design Fast Track Certification — The Inner Institute, 2026">
+        <div class="thumb"><img src="assets/Expertise07.jpeg" alt="Human Design Fast Track Certification" loading="lazy"></div>
+        <div class="meta">
+          <span class="field">Human Design</span>
+          <h4>Human Design Certification</h4>
+          <p class="org">The Inner Institute</p>
+        </div>
+      </div>
+
+      <div class="cred" data-img="assets/Expertise08.jpeg" data-cap="Advanced Practitioner of Human Design — The Inner Institute / Wild Success, 2026">
+        <div class="thumb"><img src="assets/Expertise08.jpeg" alt="Advanced Practitioner of Human Design certificate" loading="lazy"></div>
+        <div class="meta">
+          <span class="field">Human Design</span>
+          <h4>Advanced Practitioner of Human Design</h4>
+          <p class="org">The Inner Institute</p>
+        </div>
+      </div>
+
+      <div class="cred" data-img="assets/Expertise09.jpeg" data-cap="Artificial Intelligence Certification Program — WILD Success">
+        <div class="thumb"><img src="assets/Expertise09.jpeg" alt="Artificial Intelligence Certification Program" loading="lazy"></div>
+        <div class="meta">
+          <span class="field">Continuing Education</span>
+          <h4>AI &amp; Emerging Technology</h4>
+          <p class="org">Continuing education, not a core UBD methodology</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:10px;">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="justify-content:center;">Areas Of Expertise</span>
+      <h2>How It All Connects</h2>
+    </div>
+    <div class="method reveal" style="max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:rgba(6,20,49,0.12);border:1px solid rgba(6,20,49,0.12);">
+      <div style="background:var(--ivory);padding:36px 32px;">
+        <h4 style="font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:10px;">Conditioning &amp; Identity</h4>
+        <p style="font-size:14px;font-weight:300;color:var(--graphite);">Understanding how family, culture, relationships, responsibility, success, and social expectations contribute to identity formation.</p>
+      </div>
+      <div style="background:var(--ivory);padding:36px 32px;">
+        <h4 style="font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:10px;">Self-Trust &amp; Decision-Making</h4>
+        <p style="font-size:14px;font-weight:300;color:var(--graphite);">Moving from externally reinforced decision-making toward greater confidence in one's own internal signals.</p>
+      </div>
+      <div style="background:var(--ivory);padding:36px 32px;">
+        <h4 style="font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:10px;">Personal Development</h4>
+        <p style="font-size:14px;font-weight:300;color:var(--graphite);">Turning insight into practical changes in everyday life — not just self-knowledge, but self-trust in action.</p>
+      </div>
+      <div style="background:var(--ivory);padding:36px 32px;">
+        <h4 style="font-family:var(--serif);font-size:19px;font-weight:600;margin-bottom:10px;">Human Design &amp; NLP</h4>
+        <p style="font-size:14px;font-weight:300;color:var(--graphite);">Understanding natural energy, decision-making, authority, and interaction, alongside the language and beliefs that shape behavior.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="text-align:center;padding-top:20px;">
+    <a href="connect.html?type=Personal&interest=Personal%20Coaching" class="btn-outline-navy reveal">Start A Conversation</a>
+  </section>
+
+</main>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" id="lb-close">Close</button>
+  <div>
+    <img id="lb-img" src="" alt="">
+    <p class="lb-caption" id="lb-caption"></p>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand-mark">
+        <img src="assets/UBDFAVICON02.png" alt="">
+        <span class="type">UNBECOMING<br><span class="accent">BY DESIGN™</span></span>
+      </div>
+      <p class="footer-tagline">A personal development practice built on the distinction between what came from expectations and what is inherently yours.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="whatisUBD.html">What Is UBD</a></li>
+        <li><a href="meetdianalynn.html">Meet Diana Lynn</a></li>
+        <li><a href="expertise.html">Expertise</a></li>
+        <li><a href="books.html">Books</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="connect.html?type=Personal&interest=Personal%20Coaching">Personal Coaching</a></li>
+        <li><a href="unbecomingatwork.html">Unbecoming at Work</a></li>
+        <li><a href="connect.html?type=Speaking&interest=Speaking%20Engagement">Speaking</a></li>
+        <li><a href="whatothersaresaying.html">What Others Are Saying</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Connect</h4>
+      <ul>
+        <li><a href="connect.html?type=General">General Inquiry</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="disclaimer">
+    Unbecoming By Design™ provides coaching, education, and personal-development services. These services are not counseling, psychotherapy, mental-health treatment, or medical care. Diana Lynn is not a licensed counselor or therapist. Trauma-informed coaching is not trauma therapy.
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Unbecoming By Design™. All rights reserved.</span>
+    <span>Unbecoming By Design™ is a trademark of Diana Lynn.</span>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script>
+  const gallery = document.getElementById('gallery');
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lb-img');
+  const lbCaption = document.getElementById('lb-caption');
+  const lbClose = document.getElementById('lb-close');
+
+  gallery.querySelectorAll('.cred').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      lbImg.src = card.getAttribute('data-img');
+      lbImg.alt = card.getAttribute('data-cap');
+      lbCaption.textContent = card.getAttribute('data-cap');
+      lightbox.classList.add('open');
+    });
+  });
+  lbClose.addEventListener('click', ()=>lightbox.classList.remove('open'));
+  lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) lightbox.classList.remove('open'); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') lightbox.classList.remove('open'); });
+</script>
+</body>
+</html>
