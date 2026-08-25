@@ -17,6 +17,20 @@ function bool(v){
   return v === true || v === 'true' || v === '1' || v === 1 || v === 'yes' || v === 'Yes';
 }
 
+function normalizePhone(v){
+  const raw = text(v,100);
+  if(!raw) return '';
+  const digits = raw.replace(/\D/g,'');
+  if(digits.length === 10) return `+1${digits}`;
+  if(digits.length === 11 && digits.startsWith('1')) return `+${digits}`;
+  if(raw.startsWith('+') && digits.length >= 8 && digits.length <= 15) return `+${digits}`;
+  return '';
+}
+
+function escapeHtml(v){
+  return String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
 async function brevo(path, apiKey, options={}){
   const res = await fetch(`${BREVO_API}${path}`,{
     ...options,
@@ -86,6 +100,7 @@ exports.handler = async function(event){
   const message = text(body.MESSAGE,6000);
   const inquiryType = ['Personal','Business','Speaking','General'].includes(body.INQUIRY_TYPE)
     ? body.INQUIRY_TYPE : 'General';
+  const smsPhone = normalizePhone(body.SMS);
 
   if(!first || !last || !email || !interest || !message){
     return json(400,{error:'Please complete all required fields.'});
@@ -93,6 +108,14 @@ exports.handler = async function(event){
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
     return json(400,{error:'Please enter a valid email address.'});
   }
+  if(inquiryType !== 'Business' && !smsPhone){
+    return json(400,{error:'Please enter a valid phone number.'});
+  }
+  if(text(body.SMS,100) && !smsPhone){
+    return json(400,{error:'Please enter a valid phone number.'});
+  }
+
+  if(smsPhone) attributes.SMS = smsPhone;
 
   if(inquiryType === 'Business'){
     if(!text(body.BUSINESS_NAME,200) || !text(body.GROUP_SIZE,100)){
@@ -130,7 +153,6 @@ exports.handler = async function(event){
     INQUIRY_TYPE:categoryValue,
     INQUIRY_DATE:inquiryDate,
     OPT_IN:bool(body.OPT_IN),
-    MOBILE_PHONE:text(body.MOBILE_PHONE,100),
     SMS_OPT_IN:bool(body.SMS_OPT_IN)
   };
 
@@ -168,6 +190,35 @@ exports.handler = async function(event){
 
   try{
     await brevo('/contacts',apiKey,{method:'POST',body:JSON.stringify(payload)});
+
+    // Transactional confirmation email. This is not marketing; it confirms receipt of the inquiry.
+    const fromEmail = text(process.env.BREVO_FROM_EMAIL,254);
+    if(fromEmail){
+      const fromName = text(process.env.BREVO_FROM_NAME,120) || 'Diana Lynn | Unbecoming By Design';
+      const replyTo = text(process.env.BREVO_REPLY_TO_EMAIL,254) || fromEmail;
+      const firstSafe = escapeHtml(first);
+      const autoPayload = {
+        sender:{name:fromName,email:fromEmail},
+        to:[{email,name:`${first} ${last}`.trim()}],
+        replyTo:{email:replyTo,name:'Diana Lynn'},
+        subject:'Thank you for connecting with Unbecoming By Design',
+        htmlContent:`
+          <div style="font-family:Arial,Helvetica,sans-serif;color:#061431;line-height:1.65;max-width:620px;margin:auto;">
+            <p>Hi ${firstSafe},</p>
+            <p>Thank you for reaching out to Unbecoming By Design. Your message has been received, and I personally read every inquiry.</p>
+            <p>I’ll be in touch soon. In the meantime, thank you for taking the time to tell me a little about where you are and what you’re considering.</p>
+            <p>Warmly,<br>Diana Lynn<br>Unbecoming By Design™</p>
+            <p style="font-size:12px;color:#626B33;">Unbecoming the expectations. Living by your design.</p>
+          </div>`
+      };
+      try{
+        await brevo('/smtp/email',apiKey,{method:'POST',body:JSON.stringify(autoPayload)});
+      }catch(emailErr){
+        // Do not fail the inquiry if the confirmation email has a temporary problem.
+        console.warn('Brevo confirmation email warning:',emailErr.status,emailErr.data || emailErr.message);
+      }
+    }
+
     return json(200,{ok:true});
   }catch(err){
     console.error('Brevo submission error:',err.status,err.data || err.message);

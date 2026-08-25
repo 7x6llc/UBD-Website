@@ -85,8 +85,20 @@
   .hp-field{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important;}
 
   @media (max-width:700px){
-    .form-panel{padding:32px 24px;}
-    .field-row{grid-template-columns:1fr;gap:0;}
+    .connect-layout{padding:0 16px;}
+    #form-intro{margin-bottom:30px;font-size:14.5px;}
+    .form-panel{padding:28px 18px;}
+    .field-row{grid-template-columns:1fr;gap:0;margin-bottom:0;}
+    .field{margin-bottom:20px;}
+    .field input[type="text"],
+    .field input[type="email"],
+    .field input[type="tel"],
+    .field input[type="date"],
+    .field select,
+    .field textarea{font-size:16px;padding:14px 13px;}
+    .consent{margin:24px 0 28px;}
+    .submit-btn{width:100%;justify-content:center;}
+    #form-success{padding:48px 22px;}
   }
 </style>
 </head>
@@ -142,9 +154,9 @@
         </div>
 
         <div class="field">
-          <label for="MOBILE_PHONE" id="mobile-phone-label">Phone</label>
-          <input type="text" id="MOBILE_PHONE" name="MOBILE_PHONE" autocomplete="tel" inputmode="tel" placeholder="Optional">
-          <p class="hint" id="mobile-phone-hint">A mobile number is optional.</p>
+          <label for="SMS" id="mobile-phone-label">Phone<span class="req" id="phone-required-mark">*</span></label>
+          <input type="text" id="SMS" name="SMS" required autocomplete="tel" inputmode="tel" placeholder="Phone number">
+          <p class="hint" id="mobile-phone-hint">Required. Choose Yes or No below to tell us whether we may text you.</p>
           <div class="sms-choice" role="group" aria-labelledby="sms-permission-label">
             <span id="sms-permission-label" style="font-size:12px;font-weight:600;color:var(--navy);">May we text you at this number?</span>
             <label><input type="radio" name="SMS_OPT_IN" value="true"> Yes</label>
@@ -152,26 +164,16 @@
           </div>
         </div>
 
-        <!-- General-entry interest selector (item 31) -->
-        <div class="field conditional" id="general-interest-wrap" hidden>
-          <div class="conditional-inner">
-            <label for="GENERAL_INTEREST">What are you interested in?<span class="req">*</span></label>
-            <select id="GENERAL_INTEREST">
-              <option value="" disabled selected>Choose one</option>
-              <option value="Personal Coaching">Personal Coaching</option>
-              <option value="Unbecoming By Design">Unbecoming By Design</option>
-              <option value="Human Design">Human Design</option>
-              <option value="Unbecoming at Work">Unbecoming at Work</option>
-              <option value="Speaking Engagement">Speaking Engagement</option>
-              <option value="General Question">General Question</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-        </div>
-
         <div class="field">
           <label for="INTEREST">What are you interested in?<span class="req">*</span></label>
-          <input type="text" id="INTEREST" name="INTEREST" required placeholder="e.g. Personal Coaching">
+          <select id="INTEREST" name="INTEREST" required>
+            <option value="" disabled selected>Choose one</option>
+            <option value="01 - Unbecoming at Your Own Pace">01 - Unbecoming at Your Own Pace</option>
+            <option value="02 - Unbecoming Together">02 - Unbecoming Together</option>
+            <option value="03- Unbecoming with Personal Coaching">03- Unbecoming with Personal Coaching</option>
+            <option value="Unbecoming at Work">Unbecoming at Work</option>
+            <option value="Unbecoming Speaking Engagements">Unbecoming Speaking Engagements</option>
+          </select>
         </div>
 
         <!-- Business-only fields (item 29) -->
@@ -231,7 +233,7 @@
         </div>
 
         <div class="field">
-          <label for="MESSAGE">Tell me a little about what brings you here<span class="req">*</span></label>
+          <label for="MESSAGE">Tell me one thing you love about yourself. Tell me one thing you would love to be different. Or just ask or tell me anything you'd want me to know.<span class="req">*</span></label>
           <textarea id="MESSAGE" name="MESSAGE" required></textarea>
         </div>
 
@@ -286,9 +288,9 @@
     <div class="footer-col">
       <h4>Programs</h4>
       <ul>
-        <li><a href="connect.html?type=Personal&interest=Personal%20Coaching">Personal Coaching</a></li>
+        <li><a href="connect.html?type=Personal&interest=03%20-%20Unbecome%20with%20Personal%20Coaching">Personal Coaching</a></li>
         <li><a href="unbecomingatwork.html">Unbecoming at Work</a></li>
-        <li><a href="connect.html?type=Speaking&interest=Speaking%20Engagement">Speaking</a></li>
+        <li><a href="connect.html?type=Speaking&interest=Unbecoming%20Speaking%20Engagements">Speaking</a></li>
         <li><a href="whatothersaresaying.html">What Others Are Saying</a></li>
       </ul>
     </div>

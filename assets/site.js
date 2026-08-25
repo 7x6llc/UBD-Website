@@ -63,18 +63,27 @@
     const typeEl = document.getElementById('INQUIRY_TYPE');
     const interestEl = document.getElementById('INTEREST');
     const dateEl = document.getElementById('INQUIRY_DATE');
-    const generalWrap = document.getElementById('general-interest-wrap');
-    const generalSelect = document.getElementById('GENERAL_INTEREST');
     const businessFields = document.getElementById('business-fields');
     const speakingFields = document.getElementById('speaking-fields');
-    const mobileLabel = document.getElementById('mobile-phone-label');
-    const mobileHint = document.getElementById('mobile-phone-hint');
+    const phoneEl = document.getElementById('SMS');
+    const phoneLabel = document.getElementById('mobile-phone-label');
+    const phoneHint = document.getElementById('mobile-phone-hint');
+    const phoneRequiredMark = document.getElementById('phone-required-mark');
     const submitBtn = form.querySelector('.submit-btn');
     const errorEl = document.getElementById('form-error');
 
     const normalizeType = v => ['Personal','Business','Speaking','General'].includes(v) ? v : 'General';
+    const normalizeInterest = v => {
+      const map = {
+        'Personal Coaching':'03- Unbecoming with Personal Coaching',
+        'Group Program':'02 - Unbecoming Together',
+        'Unbecoming By Design':'01 - Unbecoming at Your Own Pace',
+        'Speaking Engagement':'Unbecoming Speaking Engagements'
+      };
+      return map[v] || v || '';
+    };
     let inquiryType = normalizeType(qs.get('type') || 'General');
-    let interest = qs.get('interest') || '';
+    let interest = normalizeInterest(qs.get('interest') || '');
 
     function openConditional(el,open){
       if(!el) return;
@@ -84,48 +93,53 @@
     function setRequired(container,required){
       if(!container) return;
       container.querySelectorAll('input,select,textarea').forEach(el=>{
-        // Optional business fields remain optional.
         if(['LANDLINE_NUMBER','BUSINESS_SIZE'].includes(el.name)) return;
         if(required) el.setAttribute('required',''); else el.removeAttribute('required');
       });
     }
+    function setPhoneRequirement(type){
+      if(!phoneEl) return;
+      const required = type !== 'Business';
+      phoneEl.required = required;
+      if(phoneRequiredMark) phoneRequiredMark.hidden = !required;
+      if(phoneLabel) phoneLabel.childNodes[0].nodeValue = (type === 'Business') ? 'Mobile / Direct Phone' : 'Phone';
+      if(phoneHint){
+        phoneHint.textContent = required
+          ? 'Required. Choose Yes or No below to tell us whether we may text you.'
+          : 'Optional. Use a mobile/direct number if you would like Diana to be able to reach you personally.';
+      }
+      phoneEl.placeholder = required ? 'Phone number' : 'Optional';
+    }
     function applyType(type){
       inquiryType = normalizeType(type);
       if(typeEl) typeEl.value = inquiryType;
-      const isGeneral = inquiryType === 'General';
       const isBusiness = inquiryType === 'Business';
       const isSpeaking = inquiryType === 'Speaking';
-      openConditional(generalWrap,isGeneral && !interest);
       openConditional(businessFields,isBusiness);
       openConditional(speakingFields,isSpeaking);
       setRequired(businessFields,isBusiness);
       setRequired(speakingFields,isSpeaking);
-      if(isBusiness && !interest) interest='Unbecoming at Work';
-      if(isSpeaking && !interest) interest='Speaking Engagement';
-      if(interestEl && interest) interestEl.value=interest;
-
-      if(mobileLabel){
-        mobileLabel.textContent = (isBusiness || isSpeaking) ? 'Mobile / Direct Phone' : 'Phone';
-      }
-      if(mobileHint){
-        mobileHint.textContent = (isBusiness || isSpeaking)
-          ? 'Optional. Use a mobile/direct number if you would like Diana to be able to reach you personally.'
-          : 'Optional.';
-      }
+      setPhoneRequirement(inquiryType);
+    }
+    function typeForInterest(value){
+      if(value === 'Unbecoming at Work') return 'Business';
+      if(value === 'Unbecoming Speaking Engagements') return 'Speaking';
+      if(['01 - Unbecoming at Your Own Pace','02 - Unbecoming Together','03- Unbecoming with Personal Coaching'].includes(value)) return 'Personal';
+      return inquiryType;
     }
 
     if(dateEl) dateEl.value = new Date().toISOString().slice(0,10);
-    if(interestEl && interest) interestEl.value=interest;
+    if(interestEl && interest){
+      const exists = [...interestEl.options].some(o=>o.value===interest);
+      if(exists) interestEl.value=interest;
+    }
+    if(interest) inquiryType = typeForInterest(interest);
     applyType(inquiryType);
 
-    if(generalSelect){
-      generalSelect.addEventListener('change',()=>{
-        interest = generalSelect.value;
-        if(interestEl) interestEl.value=interest;
-        if(interest==='Unbecoming at Work') applyType('Business');
-        else if(interest==='Speaking Engagement') applyType('Speaking');
-        else if(['Personal Coaching','Unbecoming By Design','Human Design'].includes(interest)) applyType('Personal');
-        else applyType('General');
+    if(interestEl){
+      interestEl.addEventListener('change',()=>{
+        interest = interestEl.value;
+        applyType(typeForInterest(interest));
       });
     }
 
@@ -143,7 +157,6 @@
         const fd = new FormData(form);
         const payload = {};
         fd.forEach((value,key)=>{
-          // For duplicated names in hidden conditional sections, keep the non-empty value.
           if(value !== '' || !(key in payload)) payload[key] = value;
         });
         payload.OPT_IN = document.getElementById('OPT_IN')?.checked || false;
