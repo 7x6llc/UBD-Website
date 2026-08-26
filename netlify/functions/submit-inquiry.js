@@ -115,7 +115,7 @@ exports.handler = async function(event){
     return json(400,{error:'Please enter a valid phone number.'});
   }
 
-  if(smsPhone) attributes.SMS = smsPhone;
+  
 
   if(inquiryType === 'Business'){
     if(!text(body.BUSINESS_NAME,200) || !text(body.GROUP_SIZE,100)){
@@ -152,6 +152,7 @@ exports.handler = async function(event){
     LEAD_SOURCE:'Website',
     INQUIRY_TYPE:categoryValue,
     INQUIRY_DATE:inquiryDate,
+    SMS:smsPhone,
     OPT_IN:bool(body.OPT_IN),
     SMS_OPT_IN:bool(body.SMS_OPT_IN)
   };
