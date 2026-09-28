@@ -1,0 +1,157 @@
+name: Build UBD Human Design
+
+on:
+  push:
+    paths:
+      - ".github/workflows/build-human-design.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out UBD website
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Get pinned Open Human Design source
+        run: |
+          git clone https://github.com/Unforced-Dev/open-human-design.git /tmp/open-human-design
+          cd /tmp/open-human-design
+          git checkout d2d55083caca6ee7da190bdf1d9a08064cf6410b
+
+      - name: Apply UBD integration
+        shell: python
+        run: |
+          from pathlib import Path
+
+          root = Path("/tmp/open-human-design")
+          index = root / "index.html"
+          s = index.read_text()
+
+          s = s.replace(
+              "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap",
+              "https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap"
+          )
+          s = s.replace("<title>Open Human Design — Free Interactive Chart</title>", "<title>Human Design Report | Unbecoming By Design</title>")
+          s = s.replace('<span class="logo-mark">◇</span>\n          <span class="logo-text">Open HD</span>', '<span class="logo-mark">◇</span>\n          <span class="logo-text">Human Design</span>')
+          s = s.replace("Free, accurate, private — your birth data never leaves this device", "Free, accurate, private - your birth data stays on your device")
+          s = s.replace("from the moment you were born. Enter your details to see your free chart — no account needed.", "from the moment you were born. Enter your details to see your free chart. No account required.")
+
+          old = '''          <div class="form-row form-row-2">
+            <div class="form-group">
+              <label for="birth-name">Name <span class="label-soft">(optional, to save)</span></label>
+              <input type="text" id="birth-name" placeholder="Your name" autocomplete="off">
+              <label class="checkbox-label hidden" id="ai-access-wrap"><input type="checkbox" id="ai-access"> Let my connected AI see this person</label>
+            </div>
+            <div class="form-group">
+              <label for="birth-date">Birth Date</label>
+              <input type="date" id="birth-date" required>
+            </div>
+          </div>'''
+          new = '''          <div class="form-row form-row-2">
+            <div class="form-group">
+              <label for="birth-name">Name</label>
+              <input type="text" id="birth-name" placeholder="Your name" autocomplete="name" required>
+              <label class="checkbox-label hidden" id="ai-access-wrap"><input type="checkbox" id="ai-access"> Let my connected AI see this person</label>
+            </div>
+            <div class="form-group">
+              <label for="report-email">Email</label>
+              <input type="email" id="report-email" placeholder="you@example.com" autocomplete="email" required>
+            </div>
+          </div>
+          <p class="email-note">By continuing, you'll also receive occasional emails from Unbecoming By Design. No clutter, just useful information and updates. You can unsubscribe anytime.</p>
+          <div class="form-row form-row-2">
+            <div class="form-group">
+              <label for="birth-date">Birth Date</label>
+              <input type="date" id="birth-date" required>
+            </div>
+          </div>'''
+          if old not in s:
+              raise SystemExit("Birth form source pattern changed")
+          s = s.replace(old, new)
+          s = s.replace("No account · no tracking · charts stay on your device", "No Account required - the chart and birth data stay on your device.")
+          index.write_text(s)
+
+          entry = root / "src/views/entry.js"
+          e = entry.read_text()
+          e = e.replace("  const nameInput = document.getElementById('birth-name');", "  const nameInput = document.getElementById('birth-name');\n  const emailInput = document.getElementById('report-email');")
+          marker = "  // --- Saved people quick-pick ---"
+          capture = """  async function captureReportLead(name, email) {
+            try {
+              await fetch('/.netlify/functions/capture-report-lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, email }),
+                keepalive: true
+              });
+            } catch (err) {
+              console.warn('Lead capture unavailable:', err);
+            }
+          }
+
+          """
+          e = e.replace(marker, capture + marker)
+          e = e.replace(
+              "    const birthDate = dateInput.value;",
+              "    const name = nameInput.value.trim();\n    const email = emailInput.value.trim();\n    if (!name) { nameInput.focus(); return; }\n    if (!email || !emailInput.checkValidity()) { emailInput.reportValidity(); return; }\n    const birthDate = dateInput.value;"
+          )
+          e = e.replace(
+              "    onSubmit({\n      name: nameInput.value.trim() || null,",
+              "    captureReportLead(name, email);\n\n    onSubmit({\n      name,"
+          )
+          entry.write_text(e)
+
+          css = root / "src/styles.css"
+          c = css.read_text()
+          c = c.replace("--accent: #c47a2a;", "--accent: #21D4D8;")
+          c = c.replace("--accent-strong: #9a5e1c;", "--accent-strong: #061431;")
+          c = c.replace("--accent-soft: #f5e6d0;", "--accent-soft: #e5f7f5;")
+          c = c.replace("--accent-hover: #834e15;", "--accent-hover: #262B33;")
+          c = c.replace("--font: 'Inter', system-ui, -apple-system, sans-serif;", "--font: 'Montserrat', system-ui, -apple-system, sans-serif;")
+          c = c.replace("--font-serif: 'Crimson Pro', Georgia, serif;", "--font-serif: 'Cormorant Garamond', Georgia, serif;")
+          c += """
+          
+          /* UBD integration */
+          #sync-button, #sync-popover { display: none !important; }
+          .email-note { margin: -4px 0 18px; font-size: 0.78rem; line-height: 1.5; opacity: 0.72; }
+          .entry-container { max-width: 620px; }
+          .chart-layout { grid-template-columns: minmax(360px, 520px) minmax(0, 1fr); gap: 28px; }
+          @media (max-width: 900px) {
+            .chart-layout { grid-template-columns: 1fr; }
+            .chart-column { position: static; max-height: none; overflow: visible; }
+          }
+          """
+          css.write_text(c)
+
+      - name: Install and build
+        working-directory: /tmp/open-human-design
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Publish built app into UBD site
+        run: |
+          rm -rf human-design
+          mkdir -p human-design
+          cp -R /tmp/open-human-design/dist/. human-design/
+          cp /tmp/open-human-design/LICENSE human-design/LICENSE 2>/dev/null || true
+
+      - name: Commit built calculator
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add human-design
+          if git diff --cached --quiet; then
+            echo "No calculator changes to commit."
+          else
+            git commit -m "Build integrated Human Design calculator"
+            git push
+          fi
