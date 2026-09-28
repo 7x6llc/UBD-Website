@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Human Design Report | Unbecoming By Design™</title>
+<meta name="description" content="Create your personal Human Design chart with Unbecoming By Design. Your chart and birth data stay on your device.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/UBDFAVICON02.png">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+.report-hero{max-width:860px;margin:0 auto;padding:80px 40px 34px;text-align:center}
+.report-hero .eyebrow{justify-content:center;margin-bottom:18px}
+.report-hero h1{font-family:var(--serif);font-size:clamp(38px,5vw,58px);font-weight:500;color:var(--navy);margin-bottom:20px}
+.report-hero p{max-width:720px;margin:0 auto;font-size:16px;line-height:1.75;font-weight:300;color:var(--graphite)}
+.report-hero a.book-link{color:var(--navy);font-weight:600;text-decoration:underline;text-decoration-color:var(--aqua);text-underline-offset:4px}
+.report-hero a.book-link:hover{color:#137f83}
+.report-wrap{max-width:900px;margin:0 auto;padding:10px 40px 90px}
+.lead-card{max-width:650px;margin:0 auto;background:#fff;border:1px solid rgba(6,20,49,.14);padding:38px}
+.lead-card h2{font-family:var(--serif);font-size:29px;font-weight:500;color:var(--navy);margin-bottom:10px}
+.lead-card .intro{font-size:14px;font-weight:300;color:var(--graphite);margin-bottom:26px}
+.lead-form{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.lead-form .full{grid-column:1/-1}
+.lead-form label{display:block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin-bottom:7px}
+.lead-form input{width:100%;padding:13px 14px;border:1px solid rgba(6,20,49,.25);background:var(--ivory);font:14px Montserrat,sans-serif;color:var(--graphite)}
+.email-note,.privacy-note{font-size:11.5px;line-height:1.6;color:var(--graphite);opacity:.82}
+.report-btn{display:inline-block;width:100%;border:1px solid var(--navy);background:var(--navy);color:var(--ivory);padding:14px 22px;font:700 11px Montserrat,sans-serif;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.report-btn:hover{background:transparent;color:var(--navy)}
+.form-status{font-size:12px;margin-top:10px;color:var(--graphite)}
+.chart-shell{display:none;margin-top:36px}
+.chart-shell.active{display:block}
+.chart-shell iframe{width:100%;height:1100px;border:1px solid rgba(6,20,49,.14);background:#fff}
+.chart-heading{text-align:center;margin-bottom:18px}
+.chart-heading h2{font-family:var(--serif);font-size:30px;color:var(--navy);font-weight:500}
+.chart-heading p{font-size:12px;color:var(--graphite)}
+@media(max-width:650px){.report-hero{padding:55px 20px 28px}.report-wrap{padding:8px 20px 60px}.lead-card{padding:26px 20px}.lead-form{grid-template-columns:1fr}.lead-form .full{grid-column:auto}.chart-shell iframe{height:1250px}}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="nav-inner">
+    <a href="index.html" class="brandmark" aria-label="Unbecoming By Design home"><img src="assets/ULOGO05.png" alt="Unbecoming By Design™"></a>
+    <nav class="primary" aria-label="Primary">
+      <ul>
+        <li><a href="whatisUBD.html">What Is UBD</a></li>
+        <li><a href="meetdianalynn.html">Meet Diana Lynn</a></li>
+        <li><a href="expertise.html">Expertise</a></li>
+        <li><a href="whatothersaresaying.html">What Others Are Saying</a></li>
+        <li><a href="books.html">Books</a></li>
+      </ul>
+      <a href="connect.html?type=General" class="btn-connect">Connect</a>
+    </nav>
+    <button class="menu-toggle" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main>
+<section class="report-hero">
+  <span class="eyebrow">Human Design</span>
+  <h1>Your Human Design Report</h1>
+  <p>Human Design offers another way to understand how you naturally move through decisions, relationships, energy, and life. See Chapter 6 in the book <a class="book-link" href="books.html">Unbecoming By Design</a>.</p>
+</section>
+<section class="report-wrap">
+  <div class="lead-card" id="lead-card">
+    <h2>Begin Your Report</h2>
+    <p class="intro">Enter your name and email to continue to your personal Human Design chart.</p>
+    <form id="report-lead-form" class="lead-form">
+      <div>
+        <label for="report-name">Name</label>
+        <input id="report-name" name="name" type="text" autocomplete="name" required>
+      </div>
+      <div>
+        <label for="report-email">Email</label>
+        <input id="report-email" name="email" type="email" autocomplete="email" required>
+      </div>
+      <p class="email-note full">By continuing, you'll also receive occasional emails from Unbecoming By Design. No clutter, just useful information and updates. You can unsubscribe anytime.</p>
+      <div class="full"><button class="report-btn" type="submit">Continue to My Human Design Report</button><div id="form-status" class="form-status" aria-live="polite"></div></div>
+    </form>
+    <p class="privacy-note" style="margin-top:18px;">No Account required - the chart and birth data stay on your device.</p>
+  </div>
+  <div class="chart-shell" id="chart-shell">
+    <div class="chart-heading">
+      <h2>Create Your Chart</h2>
+      <p>No Account required - the chart and birth data stay on your device.</p>
+    </div>
+    <iframe src="https://openhumandesign.com/" title="Human Design chart calculator" loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+  </div>
+</section>
+</main>
+<footer class="site">
+  <div class="footer-inner">
+    <div><div class="footer-brand-mark"><img src="assets/UBDFAVICON02.png" alt=""><span class="type">UNBECOMING<br><span class="accent">BY DESIGN™</span></span></div><p class="footer-tagline">A personal development practice built on the distinction between what came from expectations and what is inherently yours.</p></div>
+    <div class="footer-col"><h4>Explore</h4><ul><li><a href="whatisUBD.html">What Is UBD</a></li><li><a href="meetdianalynn.html">Meet Diana Lynn</a></li><li><a href="expertise.html">Expertise</a></li><li><a href="books.html">Books</a></li></ul></div>
+    <div class="footer-col"><h4>Programs</h4><ul><li><a href="connect.html?type=Personal&interest=03%20-%20Unbecome%20with%20Personal%20Coaching">Personal Coaching</a></li><li><a href="unbecomingatwork.html">Unbecoming at Work</a></li><li><a href="connect.html?type=Speaking&interest=Unbecoming%20Speaking%20Engagements">Speaking</a></li></ul></div>
+    <div class="footer-col"><h4>Connect</h4><ul><li><a href="connect.html?type=General">General Inquiry</a></li></ul></div>
+  </div>
+  <div class="disclaimer">Unbecoming By Design™ provides coaching, education, and personal-development services. These services are not counseling, psychotherapy, mental-health treatment, or medical care. Diana Lynn is not a licensed counselor or therapist.</div>
+  <div class="footer-bottom"><span>© 2026 Unbecoming By Design™. All rights reserved.</span><span>Unbecoming By Design™ is a trademark of Diana Lynn.</span></div>
+</footer>
+<script src="assets/site.js"></script>
+<script>
+document.getElementById('report-lead-form').addEventListener('submit', async function(e){
+  e.preventDefault();
+  const name=document.getElementById('report-name').value.trim();
+  const email=document.getElementById('report-email').value.trim();
+  const status=document.getElementById('form-status');
+  if(!name||!email){status.textContent='Please enter your name and email.';return;}
+  status.textContent='Opening your report...';
+  try{
+    const response=await fetch('/.netlify/functions/capture-report-lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email})});
+    if(!response.ok) console.warn('Lead capture returned',response.status);
+  }catch(err){console.warn('Lead capture unavailable',err);}
+  document.getElementById('lead-card').style.display='none';
+  document.getElementById('chart-shell').classList.add('active');
+  document.getElementById('chart-shell').scrollIntoView({behavior:'smooth',block:'start'});
+});
+</script>
+</body>
+</html>
