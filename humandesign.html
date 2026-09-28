@@ -44,22 +44,74 @@
 .chart-heading h2{font-family:var(--serif);font-size:30px;color:var(--navy);font-weight:500}
 .chart-heading p{font-size:12px;color:var(--graphite)}
 @media(max-width:650px){.report-hero{padding:55px 20px 28px}.report-wrap{padding:8px 20px 60px}.lead-card{padding:26px 20px}.lead-form{grid-template-columns:1fr}.lead-form .full{grid-column:auto}.chart-shell iframe{height:1250px}}
+
+.report-faq{max-width:1050px;margin:0 auto;padding:10px 40px 90px}
+.report-faq>h2{font-family:var(--serif);font-size:clamp(30px,4vw,44px);font-weight:500;color:var(--navy);text-align:center;margin-bottom:30px}
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.faq-item{border-top:1px solid rgba(6,20,49,.18);padding:20px 4px 8px}
+.faq-item h3{font-family:var(--serif);font-size:23px;font-weight:500;color:var(--navy);margin-bottom:8px}
+.faq-item p,.faq-more{font-size:13px;line-height:1.7;font-weight:300;color:var(--graphite)}
+.faq-more{text-align:center;max-width:720px;margin:30px auto 0}
+.faq-more a{color:var(--navy);font-weight:600;text-decoration:underline;text-decoration-color:var(--aqua);text-underline-offset:3px}
+@media(max-width:650px){.report-faq{padding:10px 20px 60px}.faq-grid{grid-template-columns:1fr}}
 </style>
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Unbecoming By Design Human Design Report",
-  "url": "https://unbecomingbydesign.com/humandesign.html",
-  "applicationCategory": "LifestyleApplication",
-  "operatingSystem": "Web browser",
-  "isAccessibleForFree": true,
-  "description": "A free personal Human Design chart calculator that uses birth date, birth time, and birth place to generate a Human Design report. Chart and birth data stay on the user's device.",
-  "provider": {
-    "@type": "ProfessionalService",
-    "name": "Unbecoming By Design",
-    "url": "https://unbecomingbydesign.com/"
-  }
+  "@graph": [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Unbecoming By Design Human Design Report",
+      "url": "https://unbecomingbydesign.com/humandesign.html",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "Web browser",
+      "isAccessibleForFree": true,
+      "description": "A free personal Human Design chart calculator that uses birth date, birth time, and birth place to generate a Human Design report. Chart and birth data stay on the user's device.",
+      "provider": {
+        "@type": "ProfessionalService",
+        "name": "Unbecoming By Design",
+        "url": "https://unbecomingbydesign.com/"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Human Design?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Human Design is a system used for self-observation and experimentation. In Unbecoming By Design, it is used as a lens for exploring energy, decisions, relationships, and areas where outside conditioning may become influential."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What information do I need to create a Human Design chart?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The chart uses birth date, birth time, and birth place. Birth time matters because the calculation is based on planetary positions at the time of birth."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What will the Human Design report show me?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The chart includes foundational Human Design information such as Type, Strategy, Authority, Profile, centers, channels, and gates."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is my birth information stored?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No account is required. Chart and birth data stay on the user's device. Name and email are submitted to Unbecoming By Design, but birth date, birth time, birth place, and chart details are not sent to Brevo."
+          }
+        }
+      ]
+    }
+  ]
 }
   </script>
 </head>
@@ -112,6 +164,28 @@
     </div>
     <iframe src="human-design/index.html" title="Human Design chart calculator" loading="eager" referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </div>
+</section>
+<section class="report-faq" aria-labelledby="hd-faq-title">
+  <h2 id="hd-faq-title">About Your Human Design Report</h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <h3>What is Human Design?</h3>
+      <p>Human Design is a system used for self-observation and experimentation. In Unbecoming By Design, it is used as a lens for exploring how you naturally move through energy, decisions, relationships, and areas where outside conditioning may become especially influential.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What information do I need to create a chart?</h3>
+      <p>Your chart uses your birth date, birth time, and birth place. Birth time matters because the calculation is based on planetary positions at the time of birth.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What will the report show me?</h3>
+      <p>The chart includes foundational Human Design information such as Type, Strategy, Authority, Profile, centers, channels, and gates. It is information to explore, not a prescription for who you should be.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Is my birth information stored?</h3>
+      <p>No Account required. The chart and birth data stay on your device. Your name and email are submitted to Unbecoming By Design when you begin the report, but your birth date, birth time, birth place, and chart details are not sent to Brevo.</p>
+    </div>
+  </div>
+  <p class="faq-more">Want more context before or after creating your chart? <a href="whatisUBD.html">See how Human Design fits into the Unbecoming By Design method</a>, or explore Chapter 6 in <a href="books.html">Unbecoming By Design</a>.</p>
 </section>
 </main>
 <footer class="site">
