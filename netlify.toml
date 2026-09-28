@@ -1,0 +1,4 @@
+[build]
+  command = "bash scripts/build-human-design.sh"
+  publish = "."
+  functions = "netlify/functions"
