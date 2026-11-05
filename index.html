@@ -78,6 +78,10 @@
   }
   .card{background:var(--ivory);padding:52px 38px 44px;display:flex;flex-direction:column;transition:background .4s ease;}
   .card:hover{background:#efe9dc;}
+  .card-link{color:inherit;text-decoration:none;cursor:pointer;}
+  .card-link:focus-visible{outline:3px solid var(--aqua);outline-offset:-4px;}
+  .card-link h3{min-height:3.2em;}
+  .card-link .card-cta{margin-top:auto;}
   .card .num{font-size:12px;font-weight:700;letter-spacing:0.14em;color:var(--aqua-text);margin-bottom:26px;}
   .card h3{font-family:var(--serif);font-size:23px;font-weight:600;margin-bottom:16px;line-height:1.35;}
   .card p{font-size:14.5px;font-weight:300;color:var(--graphite);margin-bottom:32px;flex-grow:1;}
@@ -173,10 +177,11 @@
     <nav class="primary" aria-label="Primary">
       <ul>
         <li><a href="whatisUBD.html" data-page="whatisUBD.html">What Is UBD</a></li>
+        <li><a href="humandesign.html" data-page="humandesign.html">What Is Human Design</a></li>
         <li><a href="meetdianalynn.html" data-page="meetdianalynn.html">Meet Diana Lynn</a></li>
         <li><a href="expertise.html" data-page="expertise.html">Expertise</a></li>
         <li><a href="whatothersaresaying.html" data-page="whatothersaresaying.html">What Others Are Saying</a></li>
-        <li><a href="humandesign.html" data-page="humandesign.html">Human Design</a></li>
+        
         <li><a href="books.html" data-page="books.html">Books</a></li>
       </ul>
       <a href="connect.html?type=General" class="btn-connect">Connect</a>
@@ -234,27 +239,27 @@
 
   <section class="ways" id="ways">
     <div class="section-head reveal">
-      <span class="eyebrow" style="justify-content:center;margin-bottom:16px;">Three Ways to Unbecome</span>
-      <h2>Three Ways to Unbecome</h2>
+      <span class="eyebrow" style="justify-content:center;margin-bottom:16px;">Own Your Life</span>
+      <h2>Three Ways to Unbecome and Own Your Life</h2>
       <p>There is no single correct way to begin. There is only the way that fits where you are right now.</p>
     </div>
 
     <div class="cards reveal">
-      <div class="card">
-        <h3>01 - Unbecoming at Your Own Pace</h3>
-        <p>Download <em>Unbecoming By Design</em> and begin identifying the expectations, inherited beliefs, roles, and patterns that may no longer reflect who you are. Move through the work privately and at your own pace as you begin separating what you've learned to be from what is actually yours.</p>
-        <a href="connect.html?type=Personal&interest=01%20-%20Unbecome%20at%20Your%20Own%20Pace" class="card-cta">Begin On Your Own <span class="arrow">→</span></a>
-      </div>
-      <div class="card">
-        <h3>02 - Unbecoming Together</h3>
-        <p>Join a community of women doing their own Unbecoming — guided resources, downloadable exercises, live video conversations and classes, recorded sessions, and the company of women asking many of the same questions.</p>
-        <a href="connect.html?type=Personal&interest=02%20-%20Unbecome%20Together" class="card-cta">Join The Group <span class="arrow">→</span></a>
-      </div>
-      <div class="card">
-        <h3>03- Unbecoming with Personal Coaching</h3>
-        <p>One-on-one coaching combines Human Design, NLP, and individualized development to examine the patterns shaping your decisions, relationships, identity, and direction — and to build practical ways of living with greater alignment and self-trust.</p>
-        <a href="connect.html?type=Personal&interest=03%20-%20Unbecome%20with%20Personal%20Coaching" class="card-cta">Explore Personal Coaching <span class="arrow">→</span></a>
-      </div>
+      <a class="card card-link" href="books.html" aria-label="Explore Book and Workbook resources">
+        <h3>01 - Book &amp; Workbook</h3>
+        <p>Begin your Unbecoming journey at your own pace. Explore the expectations, beliefs, and patterns that have shaped who you are, and start making intentional choices about the life you want to live.</p>
+        <span class="card-cta">Explore Book &amp; Resources <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+      <a class="card card-link" href="https://www.skool.com/ubecoming-by-design-collective-4016/about" target="_blank" rel="noopener noreferrer" aria-label="Join UBD Own Your Life Community on Skool">
+        <h3>02 - Join UBD | Own Your Life Community</h3>
+        <p>Connect with midlife women ready to unbecome expectations and own their lives. Explore self-paced learning, guided resources, live conversations, and a supportive community where growth happens together.</p>
+        <span class="card-cta">Join the Community <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
+      <a class="card card-link" href="connect.html?type=Personal&amp;interest=03%20-%20Unbecoming%20with%20Personal%20Coaching" aria-label="Explore 90-day direct coaching">
+        <h3>03 - Unbecoming By Design - Direct Coaching</h3>
+        <p>Work individually with DianaLynn through a 90-day coaching experience with weekly one-on-one video sessions. Explore the expectations and patterns shaping your life while developing greater clarity, self-trust, and confidence in your choices.</p>
+        <span class="card-cta">Explore Direct Coaching <span class="arrow" aria-hidden="true">→</span></span>
+      </a>
     </div>
   </section>
 
