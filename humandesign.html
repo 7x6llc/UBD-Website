@@ -19,6 +19,18 @@
 <link rel="icon" type="image/png" href="assets/UBDFAVICON02.png">
 <link rel="stylesheet" href="assets/styles.css">
 <style>
+.hd-intro{max-width:960px;margin:0 auto;padding:24px 40px 64px;color:var(--graphite)}
+.hd-intro h2,.hd-intro h3,.hd-intro h4{font-family:var(--serif);color:var(--navy);font-weight:500}
+.hd-intro h2{font-size:clamp(34px,4vw,48px);text-align:center;margin-bottom:24px}
+.hd-intro h3{font-size:30px;margin:34px 0 16px}
+.hd-intro h4{font-size:24px;margin:0 0 12px}
+.hd-intro p{font-size:15px;line-height:1.85;font-weight:300;margin-bottom:18px}
+.hd-building-blocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:24px 0 36px}
+.hd-building-blocks>div{border-top:1px solid rgba(6,20,49,.2);padding-top:20px}
+.hd-intro a{color:var(--navy);text-decoration:underline;text-decoration-color:var(--aqua);text-underline-offset:4px}
+.hd-intro .hd-caveat{font-size:12px;opacity:.8}
+@media(max-width:760px){.hd-intro{padding:20px 24px 48px}.hd-building-blocks{grid-template-columns:1fr;gap:10px}}
+
 .report-hero{max-width:860px;margin:0 auto;padding:80px 40px 34px;text-align:center}
 .report-hero .eyebrow{justify-content:center;margin-bottom:18px}
 .report-hero h1{font-family:var(--serif);font-size:clamp(38px,5vw,58px);font-weight:500;color:var(--navy);margin-bottom:20px}
@@ -122,10 +134,11 @@
     <nav class="primary" aria-label="Primary">
       <ul>
         <li><a href="whatisUBD.html">What Is UBD</a></li>
+        <li><a href="humandesign.html" data-page="humandesign.html">What Is Human Design</a></li>
         <li><a href="meetdianalynn.html">Meet Diana Lynn</a></li>
         <li><a href="expertise.html">Expertise</a></li>
         <li><a href="whatothersaresaying.html">What Others Are Saying</a></li>
-        <li><a href="humandesign.html" data-page="humandesign.html">Human Design</a></li>
+        
         <li><a href="books.html">Books</a></li>
       </ul>
       <a href="connect.html?type=General" class="btn-connect">Connect</a>
@@ -138,6 +151,22 @@
   <span class="eyebrow">Human Design</span>
   <h1>Your Human Design Report</h1>
   <p>Human Design offers another way to understand how you naturally move through decisions, relationships, energy, and life. See Chapter 6 in the book <a class="book-link" href="books.html">Unbecoming By Design</a>.</p>
+</section>
+<section class="hd-intro" aria-labelledby="hd-intro-title">
+  <h2 id="hd-intro-title">What Is Human Design?</h2>
+  <p>Human Design is a framework for understanding how you naturally interact with the world, make decisions, use your energy, and relate to others. It is not a belief system, and you do not have to believe in it to explore it. Instead, it offers a way to observe your natural tendencies, recognize what feels aligned with who you are, and question patterns or expectations you may have adopted along the way.</p>
+  <p>At the foundation of Human Design are <strong>five Energy Types: Manifestor, Generator, Manifesting Generator, Projector, and Reflector.</strong> Your Type describes how your energy is understood to interact with your internal world and the people and environments around you. It offers a starting point for exploring how you engage with life, respond to opportunities, communicate, and navigate your experiences.</p>
+  <p>Human Design goes beyond Energy Type to explore how different aspects of your design work together. These elements can provide a language for understanding your natural tendencies and recognizing where outside expectations may be influencing your choices. Rather than telling you who you must be, Human Design invites you to experiment, observe, and decide what genuinely resonates with your experience.</p>
+  <h3>The Building Blocks of Human Design</h3>
+  <div class="hd-building-blocks">
+    <div><h4>The 9 Energy Centers</h4><p>Inspired in part by the traditional seven-chakra system, Human Design uses nine centers to represent different aspects of human experience, including inspiration, communication, identity, willpower, intuition, and emotions. Each center is associated with particular energetic themes and bodily functions within the Human Design framework.</p></div>
+    <div><h4>The 64 Gates</h4><p>Human Design incorporates 64 Gates, drawing from the 64 hexagrams of the I Ching and symbolically relating them to the 64 codons of the genetic code. Gates represent particular qualities or themes. Their activation in a chart is calculated using planetary positions associated with a person's birth.</p></div>
+    <div><h4>The 36 Channels</h4><p>Channels connect pairs of Gates between Energy Centers. When both Gates forming a Channel are activated, the Channel is considered defined. Within Human Design, these connections represent consistent energetic themes and patterns that a person can explore in their everyday experiences.</p></div>
+  </div>
+  <h3>Human Design and Unbecoming By Design</h3>
+  <p>Within Unbecoming By Design, your individual Human Design becomes one of the tools we can explore during <a href="connect.html?type=Personal&amp;interest=03%20-%20Unbecoming%20with%20Personal%20Coaching">direct coaching</a>. Together, we examine how your natural tendencies may relate to the roles, beliefs, and expectations you've learned to carry.</p>
+  <p>The purpose isn't to replace one set of expectations with another. It's to develop greater awareness of what feels authentic, what may have been conditioned, and how to make choices that reflect the life you want to own.</p>
+  <p class="hd-caveat">Human Design is a reflective and interpretive framework, not a scientifically validated personality assessment or diagnostic system.</p>
 </section>
 <section class="report-wrap">
   <div class="lead-card" id="lead-card">
